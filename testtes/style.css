@@ -1,0 +1,61 @@
+body {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+#app {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+#add-task-form {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#task-name {
+  flex: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+#add-task-form button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #000;
+  color: #fff;
+}
+
+#tasks {
+  list-style: none;
+  padding: 0;
+}
+
+#tasks li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#tasks li.completed {
+  background-color: #ddd;
+  text-decoration: line-through;
+}
+
+#tasks li button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#tasks li .delete-button {
+  color: red;
+}
