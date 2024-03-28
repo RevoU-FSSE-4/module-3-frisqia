@@ -39,15 +39,45 @@
 // Untuk mengambil tugas, ganti `'titik akhir-api-Anda'` dengan API sebenarnya di sini `'https://module3-api-is2m.onrender.com/random-todos'`.
 let taskName = document.getElementById("newTask");
 let buttonTask = document.getElementById("addTaskBtn");
+let containerTask = document.getElementById("taskList");
 
 buttonTask.addEventListener("click", function () {
+  var requiredForm = taskName.required;
   if (taskName.value == "") {
     alert("Task cannot be empty!!");
+    return requiredForm; // masih dikulik
   } else {
-    let containerTask = document.getElementById("taskList");
     let taskHTML = containerTask.innerHTML;
-    taskHTML += "<li></li>";
+    taskHTML += `<li class="list-item"> 
+                      <div>
+                      <input class="form-check" type="checkbox">
+                      <span>${taskName.value}</span>
+                      </div>
+                      <button class = "badge border-0 bg-danger remove-btn">x</button>
+                </li>`;
     containerTask.innerHTML = taskHTML;
-    taskHTML.value = "";
+
+    let checkTask = document.querySelectorAll(".form-check");
+    for (let index = 0; index < checkTask.length; index++) {
+      const input = checkTask[index];
+      // console.log(input);
+      input.addEventListener("change", function () {
+        let taskSpan = input.nextElementSibling;
+        //console.log(taskSpan);
+        taskSpan.classList.toggle("text-decoration-line-through"); //perlu revisi
+      });
+    }
+
+    let removeButton = document.querySelectorAll(".remove-btn");
+    // console.log(removeButton);
+    for (let x = 0; x < removeButton.length; x++) {
+      const hapus = removeButton[x];
+      //console.log(hapus);
+      hapus.addEventListener("click", function () {
+        //console.log(this);
+        //console.log(this.parentElement);
+        this.parentElement.remove();
+      });
+    }
   }
 });
