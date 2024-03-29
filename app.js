@@ -37,15 +37,15 @@
 // ## Titik Akhir API
 
 // Untuk mengambil tugas, ganti `'titik akhir-api-Anda'` dengan API sebenarnya di sini `'https://module3-api-is2m.onrender.com/random-todos'`.
+
+const myApi = "https://module3-api-is2m.onrender.com/random-todos";
+
 let taskName = document.getElementById("newTask");
 let buttonTask = document.getElementById("addTaskBtn");
 let containerTask = document.getElementById("taskList");
-
 buttonTask.addEventListener("click", function () {
-  var requiredForm = taskName.required; //mas9h di kulik
-  if (taskName.value == "") {
-    alert("Task cannot be empty!!");
-    //return requiredForm; // masih dikulik
+  if (taskName.value === "") {
+    containerTask.innerHTML = "the task cannot be empty!";
   } else {
     let taskHTML = containerTask.innerHTML;
     taskHTML += `<li class="list-item"> 
@@ -67,9 +67,11 @@ buttonTask.addEventListener("click", function () {
       //console.log(taskSpan);
       //taskSpan.className += "complete"; // menghailkan kebalikan jadi tulisannya akan di style dlu setelah dicentang baru hilang stylenya
       input.addEventListener("change", async function () {
+        let textDecoration = taskSpan.style.textDecoration;
+        taskSpan.style.textDecoration = textDecoration ? "" : "line-through";
         //let taskSpan = input.nextElementSibling;
         //console.log(taskSpan); //menghasilkan <span>${taskName.value}</span>
-        taskSpan.classList.toggle("complete"); // menstyling taskpan agar bergaris tapi disini saya menambahkan css complete di file css
+        //taskSpan.classList.toggle("complete"); // menstyling taskpan agar bergaris tapi disini saya menambahkan css complete di file css
       });
     }
 
