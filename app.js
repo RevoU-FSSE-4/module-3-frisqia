@@ -38,12 +38,35 @@
 
 // Untuk mengambil tugas, ganti `'titik akhir-api-Anda'` dengan API sebenarnya di sini `'https://module3-api-is2m.onrender.com/random-todos'`.
 
-fetch("https://module3-api-is2m.onrender.com/random-todos")
-  .then((response) =>
-    //console.log(response)
-    response.json()
-  )
-  .then((json) => console.log(json));
+function lisData() {
+  fetch("https://module3-api-is2m.onrender.com/random-todos")
+    .then((response) =>
+      //console.log(response)
+      response.json()
+    )
+    .then((data) => {
+      let output = "";
+      data.forEach((list) => {
+        output += `<li>${list}</li>`;
+      });
+      document.querySelector("ul").innerHTML = output;
+    });
+  lisData();
+}
+
+// const apiLink = "https://module3-api-is2m.onrender.com/random-todos";
+
+// async function hitAPI(api) {
+//   try {
+//     const response = await fetch(api);
+//     const data = await response.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.log("ada eror");
+//     console.log(error);
+//   }
+// }
+// hitAPI(apiLink);
 
 let taskName = document.getElementById("newTask");
 let buttonTask = document.getElementById("addTaskBtn");
