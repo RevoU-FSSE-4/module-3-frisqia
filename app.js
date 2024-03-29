@@ -38,11 +38,17 @@
 
 // Untuk mengambil tugas, ganti `'titik akhir-api-Anda'` dengan API sebenarnya di sini `'https://module3-api-is2m.onrender.com/random-todos'`.
 
-const myApi = "https://module3-api-is2m.onrender.com/random-todos";
+fetch("https://module3-api-is2m.onrender.com/random-todos")
+  .then((response) =>
+    //console.log(response)
+    response.json()
+  )
+  .then((json) => console.log(json));
 
 let taskName = document.getElementById("newTask");
 let buttonTask = document.getElementById("addTaskBtn");
 let containerTask = document.getElementById("taskList");
+
 buttonTask.addEventListener("click", function () {
   if (taskName.value === "") {
     containerTask.innerHTML = "the task cannot be empty!";
