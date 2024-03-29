@@ -42,10 +42,10 @@ let buttonTask = document.getElementById("addTaskBtn");
 let containerTask = document.getElementById("taskList");
 
 buttonTask.addEventListener("click", function () {
-  var requiredForm = taskName.required;
+  var requiredForm = taskName.required; //mas9h di kulik
   if (taskName.value == "") {
     alert("Task cannot be empty!!");
-    return requiredForm; // masih dikulik
+    //return requiredForm; // masih dikulik
   } else {
     let taskHTML = containerTask.innerHTML;
     taskHTML += `<li class="list-item"> 
@@ -53,25 +53,30 @@ buttonTask.addEventListener("click", function () {
                       <input class="form-check" type="checkbox">
                       <span>${taskName.value}</span>
                       </div>
-                      <button class = "badge border-0 bg-danger remove-btn">x</button>
+                      <button class="badge border-0 bg-danger remove-btn">x</button>
                 </li>`;
     containerTask.innerHTML = taskHTML;
 
     let checkTask = document.querySelectorAll(".form-check");
-    for (let index = 0; index < checkTask.length; index++) {
-      const input = checkTask[index];
-      // console.log(input);
-      input.addEventListener("change", function () {
-        let taskSpan = input.nextElementSibling;
-        //console.log(taskSpan);
-        taskSpan.classList.toggle("text-decoration-line-through"); //perlu revisi
+    //console.log(checkTask); // target input.from-chek
+    for (let ceck = 0; ceck < checkTask.length; ceck++) {
+      const input = checkTask[ceck];
+      //console.log(input);
+
+      let taskSpan = input.nextElementSibling;
+      //console.log(taskSpan);
+      //taskSpan.className += "complete"; // menghailkan kebalikan jadi tulisannya akan di style dlu setelah dicentang baru hilang stylenya
+      input.addEventListener("change", async function () {
+        //let taskSpan = input.nextElementSibling;
+        //console.log(taskSpan); //menghasilkan <span>${taskName.value}</span>
+        taskSpan.classList.toggle("complete"); // menstyling taskpan agar bergaris tapi disini saya menambahkan css complete di file css
       });
     }
 
     let removeButton = document.querySelectorAll(".remove-btn");
     // console.log(removeButton);
-    for (let x = 0; x < removeButton.length; x++) {
-      const hapus = removeButton[x];
+    for (let del = 0; del < removeButton.length; del++) {
+      const hapus = removeButton[del];
       //console.log(hapus);
       hapus.addEventListener("click", function () {
         //console.log(this);
