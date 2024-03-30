@@ -1,119 +1,78 @@
-// Place your code here
-// Add any additional code necessary to fulfill the requirements of the assignment
-// Proyek ini bertujuan untuk membuat aplikasi web daftar tugas dasar dimana siswa diharuskan mengisi file JavaScript.
+const coreFun = ((taskListId, inputId, url) => {
+  //variabel punya parent
+  const targetUl = taskListId;
+  const targetInput = inputId;
+  const api = url;
 
-// ## Detail Tugas
+  function addTask() {
+    let text = document.getElementById(targetInput).value;
+    //console.log(text);
+    addLi(text);
+  }
+  function addLi(text) {
+    if (text == "") {
+      //alert("task cannot be empty!");
+      let li = document.createElement("li");
+      li.innerHTML = "task cannot be empty!";
+      document.getElementById(targetUl).appendChild(li);
+    } else {
+      let li = document.createElement("li");
+      li.innerHTML = `    <div>
+                        <input class="form-check" type="checkbox">
+                        <span>${text}</span>
+                        </div>
+                        <button class="badge border-0 bg-danger remove-btn">x</button>
+                    `;
+      document.getElementById(targetUl).appendChild(li); // appenChild fungsinya mengambil sebuah elemen dalam html ke dalam elemen yg di target
+      // membuat tugas yang sudah dikerjakan di coret/digaris
+      let checkTask = document.querySelectorAll(".form-check");
+      //console.log(checkTask); // target ke input
+      for (let ceck = 0; ceck < checkTask.length; ceck++) {
+        const input = checkTask[ceck];
+        //console.log(input); // target ke ceklisnya
+        let taskSpan = input.nextElementSibling;
+        //console.log(taskSpan); //target ke form isinya jadi input dan <span> saudaraan
+        input.addEventListener("change", async function () {
+          let textDecoration = taskSpan.style.textDecoration;
+          taskSpan.style.textDecoration = textDecoration ? "" : "line-through";
+          console.log(taskSpan);
+        });
+      }
 
-// ### Deskripsi Tugas
-
-// Tugasnya adalah melengkapi file JavaScript untuk aplikasi web daftar tugas sederhana. Kode awal HTML dan CSS disediakan, dan siswa perlu mengisi file JavaScript untuk mengimplementasikan fungsi menambah tugas, menyelesaikan tugas, dan menghapus tugas.
-
-// ### File yang Disediakan
-
-// - `index.html`: Berisi struktur halaman web.
-// - `styles.css`: Berisi gaya halaman web.
-// - `app.js`: File JavaScript awalnya kosong. Siswa wajib mengisi file ini.
-
-// ### Ikhtisar Kode Pemula
-
-// Kode awal JavaScript yang disediakan berisi event pendengar untuk menambahkan tugas, menampilkan tugas yang diambil dari API (yang perlu diganti dengan titik akhir API sebenarnya), fungsi untuk menambahkan tugas, menampilkan tugas, menyelesaikan tugas, dan menghapus tugas.
-
-// ## Petunjuk
-
-// 1. Kloning repositori ini ke mesin lokal Anda.
-// 2. Buka file `index.html` di browser web untuk melihat status aplikasi daftar tugas saat ini.
-// 3. Buka file `app.js` dan isi kode JavaScript sesuai petunjuk yang diberikan.
-// 4. Uji implementasi Anda dengan menambah, menyelesaikan, dan menghapus tugas.
-// 5. Secara opsional, Anda dapat menata aplikasi lebih lanjut dengan memodifikasi file `styles.css`.
-
-// ## Persyaratan
-
-// - Web daftar tugas yang sederhana harus dapat menambah, menyelesaikan, dan menghapus tugas.
-// - Sejak awal, web harus menampilkan 3 tugas acak dari pengambilan API.
-// - Menerapkan validasi untuk memastikan bahwa pengguna tidak dapat menambahkan tugas kosong.
-// - Gunakan manipulasi DOM alih-alih `alert` untuk validasi dan interaksi dengan pengguna.
-// - Pertahankan struktur kode yang baik, gunakan komentar, dan patuhi lekukan yang benar.
-
-// ## Titik Akhir API
-
-// Untuk mengambil tugas, ganti `'titik akhir-api-Anda'` dengan API sebenarnya di sini `'https://module3-api-is2m.onrender.com/random-todos'`.
-
-function lisData() {
-  fetch("https://module3-api-is2m.onrender.com/random-todos")
-    .then((response) =>
-      //console.log(response)
-      response.json()
-    )
-    .then((data) => {
-      let output = "";
-      data.forEach((list) => {
-        output += `<li>${list}</li>`;
-      });
-      document.querySelector("ul").innerHTML = output;
-    });
-  lisData();
-}
-
-// const apiLink = "https://module3-api-is2m.onrender.com/random-todos";
-
-// async function hitAPI(api) {
-//   try {
-//     const response = await fetch(api);
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.log("ada eror");
-//     console.log(error);
-//   }
-// }
-// hitAPI(apiLink);
-
-let taskName = document.getElementById("newTask");
-let buttonTask = document.getElementById("addTaskBtn");
-let containerTask = document.getElementById("taskList");
-
-buttonTask.addEventListener("click", function () {
-  if (taskName.value === "") {
-    containerTask.innerHTML = "the task cannot be empty!";
-  } else {
-    let taskHTML = containerTask.innerHTML;
-    taskHTML += `<li class="list-item"> 
-                      <div>
-                      <input class="form-check" type="checkbox">
-                      <span>${taskName.value}</span>
-                      </div>
-                      <button class="badge border-0 bg-danger remove-btn">x</button>
-                </li>`;
-    containerTask.innerHTML = taskHTML;
-
-    let checkTask = document.querySelectorAll(".form-check");
-    //console.log(checkTask); // target input.from-chek
-    for (let ceck = 0; ceck < checkTask.length; ceck++) {
-      const input = checkTask[ceck];
-      //console.log(input);
-
-      let taskSpan = input.nextElementSibling;
-      //console.log(taskSpan);
-      //taskSpan.className += "complete"; // menghailkan kebalikan jadi tulisannya akan di style dlu setelah dicentang baru hilang stylenya
-      input.addEventListener("change", async function () {
-        let textDecoration = taskSpan.style.textDecoration;
-        taskSpan.style.textDecoration = textDecoration ? "" : "line-through";
-        //let taskSpan = input.nextElementSibling;
-        //console.log(taskSpan); //menghasilkan <span>${taskName.value}</span>
-        //taskSpan.classList.toggle("complete"); // menstyling taskpan agar bergaris tapi disini saya menambahkan css complete di file css
-      });
-    }
-
-    let removeButton = document.querySelectorAll(".remove-btn");
-    // console.log(removeButton);
-    for (let del = 0; del < removeButton.length; del++) {
-      const hapus = removeButton[del];
-      //console.log(hapus);
-      hapus.addEventListener("click", function () {
-        //console.log(this);
-        //console.log(this.parentElement);
-        this.parentElement.remove();
-      });
+      //button x jika di klik maka terhapus tugasnya
+      let removeButton = document.querySelectorAll(".remove-btn");
+      //console.log(removeButton);
+      for (let del = 0; del < removeButton.length; del++) {
+        const hapus = removeButton[del];
+        //console.log(hapus);
+        hapus.addEventListener("click", function () {
+          //console.log(this);
+          //console.log(this.parentElement);
+          this.parentElement.remove();
+        });
+      }
     }
   }
+  async function fetchRandomTask() {
+    try {
+      const response = await fetch(api);
+      const data = await response.json();
+      for (let index = 0; index < data.length; index++) {
+        const text = data[index];
+        addLi(text);
+      }
+      //console.log(data); //data sebuah array
+    } catch (error) {
+      console.log("ERROR");
+    }
+  }
+  return {
+    addTask: addTask, // returnya sebuah objek
+    fetchRandomTask: fetchRandomTask,
+  };
+})("taskList", "newTask", "https://module3-api-is2m.onrender.com/random-todos"); //ini iife // id input dan ul
+//console.log(coreFun);
+document.getElementById("addTaskBtn").addEventListener("click", () => {
+  coreFun.addTask(); // sehingga returnya harus kita panggil
 });
+document.addEventListener("load", coreFun.fetchRandomTask());
