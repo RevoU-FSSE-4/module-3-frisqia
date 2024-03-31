@@ -60,19 +60,19 @@
 //   lisData();
 // }
 
-// const apiLink = "https://module3-api-is2m.onrender.com/random-todos";
+const apiLink = "https://module3-api-is2m.onrender.com/random-todos";
 
-// async function hitAPI(api) {
-//   try {
-//     const response = await fetch(api);
-//     const data = await response.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.log("ada eror");
-//     console.log(error);
-//   }
-// }
-// hitAPI(apiLink);
+async function hitAPI(api) {
+  try {
+    const response = await fetch(api);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log("ada eror");
+    console.log(error);
+  }
+}
+hitAPI(apiLink);
 
 let taskName = document.getElementById("newTask");
 let buttonTask = document.getElementById("addTaskBtn");
@@ -99,11 +99,26 @@ buttonTask.addEventListener("click", function () {
       //console.log(input);
 
       let taskSpan = input.nextElementSibling;
-      //console.log(taskSpan);
-      //taskSpan.className += "complete"; // menghailkan kebalikan jadi tulisannya akan di style dlu setelah dicentang baru hilang stylenya
-      input.addEventListener("change", async function () {
-        let textDecoration = taskSpan.style.textDecoration;
-        taskSpan.style.textDecoration = textDecoration ? "" : "line-through";
+      input.addEventListener("change", function () {
+        const toggleService = (function () {
+          return {
+            run: function () {
+              let textDecoration = taskSpan.style.textDecoration;
+              taskSpan.style.textDecoration = textDecoration
+                ? ""
+                : "line-through";
+              // let taskSpan = input.nextElementSibling;
+              // taskSpan.classList.toggle("complete");
+            },
+          };
+        })();
+        toggleService.run();
+        // let taskSpan = input.nextElementSibling;
+        // //console.log(taskSpan);
+        // //taskSpan.className += "complete"; // menghailkan kebalikan jadi tulisannya akan di style dlu setelah dicentang baru hilang stylenya
+        // input.addEventListener("change", async function () {
+        // let textDecoration = taskSpan.style.textDecoration;
+        // taskSpan.style.textDecoration = textDecoration ? "" : "line-through";
         //let taskSpan = input.nextElementSibling;
         //console.log(taskSpan); //menghasilkan <span>${taskName.value}</span>
         //taskSpan.classList.toggle("complete"); // menstyling taskpan agar bergaris tapi disini saya menambahkan css complete di file css

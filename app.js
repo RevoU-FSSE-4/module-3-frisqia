@@ -1,7 +1,7 @@
-const coreFun = ((taskListId, inputId, url) => {
+const coreFun = ((taskList, inputTask, url) => {
   //variabel punya parent
-  const targetUl = taskListId;
-  const targetInput = inputId;
+  const targetUl = taskList;
+  const targetInput = inputTask;
   const api = url;
 
   function addTask() {
