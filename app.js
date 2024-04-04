@@ -17,7 +17,9 @@ const coreFun = ((taskList, inputTask, url) => {
       document.getElementById(targetUl).appendChild(li);
     } else {
       let li = document.createElement("li");
-      li.innerHTML = `    <div>
+      li.innerHTML =
+        "" +
+        `    <div>
                         <input class="form-check" type="checkbox">
                         <span>${text}</span>
                         </div>
