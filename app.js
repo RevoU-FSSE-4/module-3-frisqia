@@ -13,8 +13,22 @@ const coreFun = ((taskList, inputTask, url) => {
     if (text == "") {
       //alert("task cannot be empty!");
       let li = document.createElement("li");
-      li.innerHTML = "task cannot be empty!";
+      li.innerHTML = `<div><span>"Task Cannot be empty!"</span>
+                      </div>
+                      <button class="badge border-0 bg-danger remove-btn">x</button>
+                  `;
       document.getElementById(targetUl).appendChild(li);
+      let removeButton = document.querySelectorAll(".remove-btn");
+      //console.log(removeButton);
+      for (let del = 0; del < removeButton.length; del++) {
+        const hapus = removeButton[del];
+        //console.log(hapus);
+        hapus.addEventListener("click", function () {
+          //console.log(this);
+          //console.log(this.parentElement);
+          this.parentElement.remove();
+        });
+      }
     } else {
       let li = document.createElement("li");
       li.innerHTML =
