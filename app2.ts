@@ -20,7 +20,7 @@ const coreFunction: CoreFunction = ((
 
   function addLi(text: string): void {
     if (text === "") {
-      let li = document.createElement("li");
+      let li: any = document.createElement("li");
       li.innerHTML = `    <div>
       <span>Task cannot be empty!</span>
       </div>
@@ -31,7 +31,7 @@ const coreFunction: CoreFunction = ((
       let removeButtons: NodeListOf<HTMLButtonElement> =
         document.querySelectorAll<HTMLButtonElement>(".remove-btn");
       console.log(removeButtons);
-      for (let del = 0; del < removeButtons.length; del++) {
+      for (let del: number = 0; del < removeButtons.length; del++) {
         const hapus: HTMLButtonElement = removeButtons[del];
         hapus.addEventListener("click", function () {
           this.parentElement?.remove();
@@ -50,9 +50,9 @@ const coreFunction: CoreFunction = ((
 
       let checkTask: any;
       checkTask = document.querySelectorAll<HTMLInputElement>(".form-check");
-      for (let ceck = 0; ceck < checkTask.length; ceck++) {
-        const input = checkTask[ceck];
-        let taskSpan = input.nextElementSibling as HTMLElement;
+      for (let ceck: number = 0; ceck < checkTask.length; ceck++) {
+        const input: any = checkTask[ceck];
+        let taskSpan: any = input.nextElementSibling as HTMLElement;
         input.addEventListener("change", async () => {
           let textDecoration: string | boolean;
           textDecoration = taskSpan.style.textDecoration;
@@ -62,7 +62,7 @@ const coreFunction: CoreFunction = ((
 
       let removeButtons: NodeListOf<HTMLButtonElement> =
         document.querySelectorAll<HTMLButtonElement>(".remove-btn");
-      for (let del = 0; del < removeButtons.length; del++) {
+      for (let del: number = 0; del < removeButtons.length; del++) {
         const removeButton = removeButtons[del];
         removeButton.addEventListener("click", function () {
           this.parentElement?.remove();
@@ -79,7 +79,7 @@ const coreFunction: CoreFunction = ((
     try {
       const response = await fetch(api);
       const data: any[] = await response.json();
-      for (let index = 0; index < data.length; index++) {
+      for (let index: number = 0; index < data.length; index++) {
         const text: string = data[index];
         addLi(text);
       }
